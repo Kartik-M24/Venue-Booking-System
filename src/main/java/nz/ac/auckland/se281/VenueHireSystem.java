@@ -29,7 +29,7 @@ public class VenueHireSystem {
           MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
         }
         if (this.capacityInput <= 0) {
-
+          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
         }
 
 
