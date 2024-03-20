@@ -4,6 +4,7 @@ import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
+  //Instance Fields
   private String venueName;
   private String venueCode;
   private Integer capacityInput;
@@ -21,17 +22,17 @@ public class VenueHireSystem {
         this.venueName = venueName;
         this.venueCode = venueCode;
         
-        //Checks to see if hireFee and capacityInput inputs can be converted into Integers
+        //Checks to see if hireFeeInput and capacityInput inputs can be converted into Integers
         try {
           this.capacityInput = Integer.parseInt(capacityInput);
         }
-        catch (NumberFormatException e) {
+        catch (NumberFormatException e1) {
           MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
         }
         try {
-          this.hireFeeInput = Integer.parseInt(capacityInput);
+          this.hireFeeInput = Integer.parseInt(hireFeeInput);
         }
-        catch (NumberFormatException e) {
+        catch (NumberFormatException e2) {
           MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
         }
 
