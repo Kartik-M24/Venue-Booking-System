@@ -8,7 +8,6 @@ public class VenueHireSystem {
   private String venueCode;
   private Integer capacityInput;
   private Integer hireFeeInput;
-  
 
   public VenueHireSystem() {}
 
@@ -21,8 +20,20 @@ public class VenueHireSystem {
         //Assign inputs to variables
         this.venueName = venueName;
         this.venueCode = venueCode;
-        this.capacityInput = Integer.parseInt(capacityInput);
-        this.hireFeeInput = Integer.parseInt(hireFeeInput);
+        
+        //Checks to see if hireFee and capacityInput inputs can be converted into Integers
+        try {
+          this.capacityInput = Integer.parseInt(capacityInput);
+        }
+        catch (NumberFormatException e) {
+          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
+        }
+        try {
+          this.hireFeeInput = Integer.parseInt(capacityInput);
+        }
+        catch (NumberFormatException e) {
+          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
+        }
 
         //Check if user inputs are valid
         if ((this.venueName.strip()).isEmpty() == true){
@@ -31,7 +42,7 @@ public class VenueHireSystem {
         if (this.capacityInput <= 0) {
           MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
         }
-
+    
 
 
 
