@@ -20,7 +20,17 @@ public class VenueHireSystem {
   public VenueHireSystem() {}
 
   public void printVenues() {
-    
+    int numberOfVenues = hireVenue.size();
+        if (numberOfVenues == 0){
+          MessageCli.NO_VENUES.printMessage();
+        }
+        if (numberOfVenues == 1){
+          MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
+          MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode); 
+        }
+        // if (numberOfVenues > 1 && numberOfVenues < 10){
+          
+        // }
   }
 
   public void createVenue(
@@ -59,11 +69,8 @@ public class VenueHireSystem {
 
         //All user inputs are valid - create venue
         this.hireVenue.add(new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
-        int numberOfVenues = hireVenue.size();
-        if (numberOfVenues == 1){
-          MessageCli.NUMBER_VENUES.printMessage("is", "one", ""); 
-        }
-        MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
+        
+       
 
     
 
