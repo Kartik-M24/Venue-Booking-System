@@ -43,6 +43,10 @@ public class VenueHireSystem {
         if (this.capacityInput <= 0) {
           MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
         }
+        if (this.hireFeeInput <= 0) {
+          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
+        }
+
     
 
 
