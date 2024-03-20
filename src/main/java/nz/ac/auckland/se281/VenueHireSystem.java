@@ -13,15 +13,24 @@ public class VenueHireSystem {
   public VenueHireSystem() {}
 
   public void printVenues() {
-    // TODO implement this method
+    
   }
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
+        //Assign inputs to variables
         this.venueName = venueName;
         this.venueCode = venueCode;
         this.capacityInput = capacityInput;
         this.hireFeeInput = hireFeeInput;
+
+        //Check if inputs are valid
+        if ((venueName.strip()).isEmpty() == true){
+          MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
+        }
+
+
+
 
   }
 
