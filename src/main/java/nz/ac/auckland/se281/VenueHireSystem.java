@@ -6,8 +6,8 @@ import nz.ac.auckland.se281.Types.FloralType;
 public class VenueHireSystem {
   private String venueName;
   private String venueCode;
-  private String capacityInput;
-  private String hireFeeInput;
+  private Integer capacityInput;
+  private Integer hireFeeInput;
   
 
   public VenueHireSystem() {}
@@ -21,12 +21,15 @@ public class VenueHireSystem {
         //Assign inputs to variables
         this.venueName = venueName;
         this.venueCode = venueCode;
-        this.capacityInput = capacityInput;
-        this.hireFeeInput = hireFeeInput;
+        this.capacityInput = Integer.parseInt(capacityInput);
+        this.hireFeeInput = Integer.parseInt(hireFeeInput);
 
-        //Check if inputs are valid
-        if ((venueName.strip()).isEmpty() == true){
+        //Check if user inputs are valid
+        if ((this.venueName.strip()).isEmpty() == true){
           MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
+        }
+        if (this.capacityInput <= 0) {
+
         }
 
 
