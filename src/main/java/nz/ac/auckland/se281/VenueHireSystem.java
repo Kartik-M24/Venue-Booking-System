@@ -69,7 +69,7 @@ public class VenueHireSystem {
 
         //All user inputs are valid - create venue
         this.hireVenue.add(new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
-        
+        MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode); 
        
 
     
