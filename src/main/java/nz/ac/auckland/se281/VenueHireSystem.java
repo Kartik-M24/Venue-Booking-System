@@ -1,5 +1,10 @@
 package nz.ac.auckland.se281;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import org.eclipse.jgit.ignore.internal.Strings;
+
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
 
@@ -9,6 +14,8 @@ public class VenueHireSystem {
   private String venueCode;
   private Integer capacityInput;
   private Integer hireFeeInput;
+  private ArrayList<ArrayList<String>> hireVenue = new ArrayList<ArrayList<String>>(); //Multidimensional ArrayList
+
 
   public VenueHireSystem() {}
 
@@ -46,6 +53,17 @@ public class VenueHireSystem {
         if (this.hireFeeInput <= 0) {
           MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
         }
+
+        //Check to make sure venueCode is unique
+
+
+        //All user inputs are valid - create venue
+        this.hireVenue.add(new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
+        int numberOfVenues = hireVenue.size();
+        if (numberOfVenues == 1){
+          MessageCli.NUMBER_VENUES.printMessage("is", "one", ""); 
+        }
+        MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
 
     
 
