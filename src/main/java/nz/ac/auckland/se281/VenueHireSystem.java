@@ -17,7 +17,7 @@ public class VenueHireSystem {
   public VenueHireSystem() {} // Check purpose of this should I be putting instance fields here?
 
   public void printVenues() {
-    int numberOfVenues = hireVenue.size();
+    Integer numberOfVenues = hireVenue.size();
 
     if (numberOfVenues == 0) {
       MessageCli.NO_VENUES.printMessage();
@@ -31,13 +31,13 @@ public class VenueHireSystem {
     }
     if (numberOfVenues >= 10) {
       MessageCli.NUMBER_VENUES.printMessage("are", "" + numberOfVenues, "s");
-      for (int i = 0; i < numberOfVenues; i++) {
-        MessageCli.VENUE_ENTRY.printMessage(
-            hireVenue.get(i).get(0), // gets the first value of the current row, venueName
-            hireVenue.get(i).get(1), // second value venueCode
-            hireVenue.get(i).get(2), // third value capacityInput
-            hireVenue.get(i).get(3)); // fourth value hireFeeInput
-      }
+    }
+    for (int i = 0; i < numberOfVenues; i++) {
+      MessageCli.VENUE_ENTRY.printMessage(
+          hireVenue.get(i).get(0), // gets the first value of the current row, venueName
+          hireVenue.get(i).get(1), // second value venueCode
+          hireVenue.get(i).get(2), // third value capacityInput
+          hireVenue.get(i).get(3)); // fourth value hireFeeInput
     }
   }
 
@@ -77,13 +77,21 @@ public class VenueHireSystem {
     }
 
     // Check to make sure venueCode is unique
-    // for (int x = 0; x < this.numberOfVenues; x++){
-
-    // }
-
+    Integer numVenues = hireVenue.size();
+    for (int x = 0; x < numVenues; x++) {
+      if (hireVenue.get(x).get(1).equals(this.venueCode)) {
+        MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(
+            hireVenue.get(x).get(1), hireVenue.get(x).get(0));
+        this.venueCode = null;
+        break;
+      }
+    }
 
     // Checks if all user inputs are valid - create venue
-    if (this.hireFeeInput != null && this.capacityInput != null && this.venueName != null) {
+    if (this.hireFeeInput != null
+        && this.capacityInput != null
+        && this.venueName != null
+        && this.venueCode != null) {
       this.hireVenue.add(
           new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(
