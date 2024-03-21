@@ -23,6 +23,7 @@ public class VenueHireSystem {
       "two", "three", "four", "five", "six", "seven", "eight", "nine"
     }; // called when total venues being displayed is between 2-9 inclusive
 
+    // Outputs appropriate message for Number of Venues already booked according to numebrOfVenues
     if (numberOfVenues == 0) {
       MessageCli.NO_VENUES.printMessage();
     }
@@ -35,6 +36,8 @@ public class VenueHireSystem {
     if (numberOfVenues >= 10) {
       MessageCli.NUMBER_VENUES.printMessage("are", "" + numberOfVenues, "s");
     }
+
+    // Print list of already booked Venues (and their details)
     for (int i = 0; i < numberOfVenues; i++) {
       MessageCli.VENUE_ENTRY.printMessage(
           hireVenue.get(i).get(0), // gets the first value of the current row, venueName
@@ -50,7 +53,7 @@ public class VenueHireSystem {
     this.venueName = venueName;
     this.venueCode = venueCode;
 
-    // Outputs Error message if venueName isn't valid
+    // Checks to see if venueName isn't valid
     if ((this.venueName.strip()).isEmpty() == true) {
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
       this.venueName = null;
@@ -68,6 +71,7 @@ public class VenueHireSystem {
       MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
       this.capacityInput = null;
     }
+
     try {
       this.hireFeeInput = Integer.parseInt(hireFeeInput);
       if (this.hireFeeInput <= 0) {
@@ -90,15 +94,14 @@ public class VenueHireSystem {
       }
     }
 
-    // Checks if all user inputs are valid - create venue
+    // Checks if all user inputs are valid then creates venue booking
     if (this.hireFeeInput != null
         && this.capacityInput != null
         && this.venueName != null
         && this.venueCode != null) {
       this.hireVenue.add(
           new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
-      MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(
-          venueName, venueCode); // outputs success message
+      MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
     }
   }
 
