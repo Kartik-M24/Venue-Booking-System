@@ -2,80 +2,84 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import org.eclipse.jgit.ignore.internal.Strings;
-
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
-  //Instance Fields
+  // Instance Fields
   private String venueName;
   private String venueCode;
   private Integer capacityInput;
   private Integer hireFeeInput;
-  private ArrayList<ArrayList<String>> hireVenue = new ArrayList<ArrayList<String>>(); //Multidimensional ArrayList
-
+  private ArrayList<ArrayList<String>> hireVenue =
+      new ArrayList<ArrayList<String>>(); // Multidimensional ArrayList
 
   public VenueHireSystem() {}
 
   public void printVenues() {
     int numberOfVenues = hireVenue.size();
-        if (numberOfVenues == 0){
-          MessageCli.NO_VENUES.printMessage();
-        }
-        if (numberOfVenues == 1){
-          MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
-          MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode); 
-        }
-        // if (numberOfVenues > 1 && numberOfVenues < 10){
-          
-        // }
+
+    if (numberOfVenues == 0) {
+      MessageCli.NO_VENUES.printMessage();
+    }
+    if (numberOfVenues == 1) {
+      MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
+      // MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
+    }
+    if (numberOfVenues > 1 && numberOfVenues < 10) {
+      MessageCli.NUMBER_VENUES.printMessage(
+          "are", "", "s"); // haven't configured converting into to string value
+    }
+    if (numberOfVenues >= 10) {
+      MessageCli.NUMBER_VENUES.printMessage("are", "" + numberOfVenues, "s");
+      for (int i = 0; i < numberOfVenues; i++) {
+        MessageCli.VENUE_ENTRY.printMessage(
+            hireVenue.get(i).get(0), // This gets the first value of the current row, venueName
+            hireVenue.get(i).get(1), // second value venueCode
+            hireVenue.get(i).get(2), // third value capacityInput
+            hireVenue.get(i).get(3)); // fourth value hireFeeInput
+      }
+    }
   }
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-        //Assign inputs to variables
-        this.venueName = venueName;
-        this.venueCode = venueCode;
-        
-        //Checks to see if hireFeeInput and capacityInput inputs can be converted into Integers
-        try {
-          this.capacityInput = Integer.parseInt(capacityInput);
-        }
-        catch (NumberFormatException e1) {
-          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
-        }
-        try {
-          this.hireFeeInput = Integer.parseInt(hireFeeInput);
-        }
-        catch (NumberFormatException e2) {
-          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
-        }
+    // Assign inputs to variables
+    this.venueName = venueName;
+    this.venueCode = venueCode;
 
-        //Check if user inputs are valid
-        if ((this.venueName.strip()).isEmpty() == true){
-          MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
-        }
-        if (this.capacityInput <= 0) {
-          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
-        }
-        if (this.hireFeeInput <= 0) {
-          MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
-        }
+    // Check if venueName input is valid
+    if ((this.venueName.strip()).isEmpty() == true) {
+      MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
+    }
 
-        //Check to make sure venueCode is unique
+    // Checks to see if hireFeeInput and capacityInput inputs can be converted into Integers and if
+    // these
+    // integer values are appropriate
+    try {
+      this.capacityInput = Integer.parseInt(capacityInput);
+      if (this.capacityInput <= 0) {
+        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
+      }
+    } catch (NumberFormatException e1) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
+    }
+    try {
+      this.hireFeeInput = Integer.parseInt(hireFeeInput);
+      if (this.hireFeeInput <= 0) {
+        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
+      }
+    } catch (NumberFormatException e2) {
+      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
+    }
 
+    // Check to make sure venueCode is unique
 
-        //All user inputs are valid - create venue
-        this.hireVenue.add(new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
-        MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode); 
-       
-
-    
-
-
-
+    // All user inputs are valid - create venue
+    this.hireVenue.add(
+        new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
+    MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(
+        venueName, venueCode); // outputs success message
   }
 
   public void setSystemDate(String dateInput) {
