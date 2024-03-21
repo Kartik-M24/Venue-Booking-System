@@ -17,7 +17,11 @@ public class VenueHireSystem {
   public VenueHireSystem() {} // Check purpose of this should I be putting instance fields here?
 
   public void printVenues() {
+    // Pre-setting variables
     Integer numberOfVenues = hireVenue.size();
+    String[] numberInWords = {
+      "two", "three", "four", "five", "six", "seven", "eight", "nine"
+    }; // called when total venues being displayed is between 2-9 inclusive
 
     if (numberOfVenues == 0) {
       MessageCli.NO_VENUES.printMessage();
@@ -26,8 +30,7 @@ public class VenueHireSystem {
       MessageCli.NUMBER_VENUES.printMessage("is", "one", "");
     }
     if (numberOfVenues > 1 && numberOfVenues < 10) {
-      MessageCli.NUMBER_VENUES.printMessage(
-          "are", "", "s"); // haven't configured converting into to string value
+      MessageCli.NUMBER_VENUES.printMessage("are", numberInWords[numberOfVenues - 2], "s");
     }
     if (numberOfVenues >= 10) {
       MessageCli.NUMBER_VENUES.printMessage("are", "" + numberOfVenues, "s");
