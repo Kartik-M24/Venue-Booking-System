@@ -13,12 +13,13 @@ public class VenueHireSystem {
   private Integer hireFeeInput;
   private ArrayList<ArrayList<String>> hireVenue =
       new ArrayList<ArrayList<String>>(); // Multidimensional ArrayList
+  private Integer numberOfVenues;
 
   public VenueHireSystem() {} // Check purpose of this should I be putting instance fields here?
 
   public void printVenues() {
     // Pre-setting variables
-    Integer numberOfVenues = hireVenue.size();
+    numberOfVenues = hireVenue.size();
     String[] numberInWords = {
       "two", "three", "four", "five", "six", "seven", "eight", "nine"
     }; // called when total venues being displayed is between 2-9 inclusive
@@ -84,8 +85,8 @@ public class VenueHireSystem {
     }
 
     // Check to make sure venueCode is unique
-    Integer numVenues = hireVenue.size();
-    for (int x = 0; x < numVenues; x++) {
+    numberOfVenues = hireVenue.size();
+    for (int x = 0; x < numberOfVenues; x++) {
       if (hireVenue.get(x).get(1).equals(this.venueCode)) {
         MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(
             hireVenue.get(x).get(1), hireVenue.get(x).get(0));
