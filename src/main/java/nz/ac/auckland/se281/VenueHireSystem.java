@@ -51,13 +51,15 @@ public class VenueHireSystem {
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
     // Assign inputs to variables
-    this.venueName = venueName;
-    this.venueCode = venueCode;
+    this.venueName = venueName.trim();
+    this.venueCode = venueCode.trim();
 
     // Checks to see if venueName isn't valid
     if ((this.venueName.strip()).isEmpty() == true) {
       MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
-      this.venueName = null;
+      this.venueName =
+          null; // if user input isn't valid variables are assigne as null to prevent the venue from
+      // being added
     }
 
     // Checks to see if hireFeeInput and capacityInput inputs can be converted into Integers and if
