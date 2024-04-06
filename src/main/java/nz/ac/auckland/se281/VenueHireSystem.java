@@ -39,7 +39,7 @@ public class VenueHireSystem {
           hireVenue.get(i).getVenueName(), // gets the corresponding venue i, and its name
           hireVenue.get(i).getVenueCode(),
           hireVenue.get(i).getCapacityInput(),
-          hireVenue.get(i).getHireFeeInput()); 
+          hireVenue.get(i).getHireFeeInput());
     }
   }
 
@@ -60,7 +60,11 @@ public class VenueHireSystem {
   }
 
   public void printSystemDate() {
-    // TODO implement this method
+    if (this.date == null) {
+      MessageCli.CURRENT_DATE.printMessage("not set");
+    } else {
+      MessageCli.CURRENT_DATE.printMessage(this.date);
+    }
   }
 
   public void makeBooking(String[] options) {
