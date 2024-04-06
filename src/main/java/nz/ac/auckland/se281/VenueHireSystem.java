@@ -1,21 +1,15 @@
 package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
 
 public class VenueHireSystem {
   // Instance Fields
-  private String venueName;
-  private String venueCode;
-  private Integer capacityInput;
-  private Integer hireFeeInput;
-  private ArrayList<ArrayList<String>> hireVenue =
-      new ArrayList<ArrayList<String>>(); // Multidimensional ArrayList
+  private ArrayList<Venue> hireVenue = new ArrayList<Venue>(); // Arraylist of valid Venues
   private Integer numberOfVenues;
 
-  public VenueHireSystem() {} // Check purpose of this should I be putting instance fields here?
+  public VenueHireSystem() {}
 
   public void printVenues() {
     // Pre-setting variables
@@ -41,69 +35,20 @@ public class VenueHireSystem {
     // Print list of already booked Venues (and their details)
     for (int i = 0; i < numberOfVenues; i++) {
       MessageCli.VENUE_ENTRY.printMessage(
-          hireVenue.get(i).get(0), // gets the first value of the current row, venueName
-          hireVenue.get(i).get(1), // second value venueCode
-          hireVenue.get(i).get(2), // third value capacityInput
-          hireVenue.get(i).get(3)); // fourth value hireFeeInput
+          hireVenue.get(i).getVenueName(), // gets the first value of the current row, venueName
+          hireVenue.get(i).getVenueCode(), // second value venueCode
+          hireVenue.get(i).getCapacityInput(), // third value capacityInput
+          hireVenue.get(i).getHireFeeInput()); // fourth value hireFeeInput
     }
   }
 
   public void createVenue(
       String venueName, String venueCode, String capacityInput, String hireFeeInput) {
-    // Assign inputs to variables
-    this.venueName = venueName.trim();
-    this.venueCode = venueCode.trim();
+    Venue booking = new Venue(); // Verifies Venue details and creates a new Venue object
 
-    // Checks to see if venueName isn't valid
-    if ((this.venueName.strip()).isEmpty() == true) {
-      MessageCli.VENUE_NOT_CREATED_EMPTY_NAME.printMessage();
-      this.venueName =
-          null; // if user input isn't valid variables are assigne as null to prevent the venue from
-      // being added
-    }
-
-    // Checks to see if hireFeeInput and capacityInput inputs can be converted into Integers and if
-    // these integer values are appropriate
-    try {
-      this.capacityInput = Integer.parseInt(capacityInput);
-      if (this.capacityInput <= 0) {
-        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", " positive");
-        this.capacityInput = null;
-      }
-    } catch (NumberFormatException e) {
-      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("capacity", "");
-      this.capacityInput = null;
-    }
-
-    try {
-      this.hireFeeInput = Integer.parseInt(hireFeeInput);
-      if (this.hireFeeInput <= 0) {
-        MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", " positive");
-        this.hireFeeInput = null;
-      }
-    } catch (NumberFormatException e) {
-      MessageCli.VENUE_NOT_CREATED_INVALID_NUMBER.printMessage("hire fee", "");
-      this.hireFeeInput = null;
-    }
-
-    // Check to make sure venueCode is unique
-    numberOfVenues = hireVenue.size();
-    for (int x = 0; x < numberOfVenues; x++) {
-      if (hireVenue.get(x).get(1).equals(this.venueCode)) {
-        MessageCli.VENUE_NOT_CREATED_CODE_EXISTS.printMessage(
-            hireVenue.get(x).get(1), hireVenue.get(x).get(0));
-        this.venueCode = null;
-        break;
-      }
-    }
-
-    // Checks if all user inputs are valid then creates venue booking
-    if (this.hireFeeInput != null
-        && this.capacityInput != null
-        && this.venueName != null
-        && this.venueCode != null) {
-      this.hireVenue.add(
-          new ArrayList<String>(Arrays.asList(venueName, venueCode, capacityInput, hireFeeInput)));
+    // If the venue is valid, add it to the list of venues
+    if (booking.validVenue(venueName, venueCode, capacityInput, hireFeeInput, hireVenue) == true) {
+      hireVenue.add(booking); // Adds venue to hireVenue
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
     }
   }
