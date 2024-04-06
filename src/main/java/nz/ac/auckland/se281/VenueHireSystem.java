@@ -8,6 +8,7 @@ public class VenueHireSystem {
   // Instance Fields
   private ArrayList<Venue> hireVenue = new ArrayList<Venue>(); // Arraylist of valid Venues
   private Integer numberOfVenues;
+  private String date;
 
   public VenueHireSystem() {}
 
@@ -35,10 +36,10 @@ public class VenueHireSystem {
     // Print list of already booked Venues (and their details)
     for (int i = 0; i < numberOfVenues; i++) {
       MessageCli.VENUE_ENTRY.printMessage(
-          hireVenue.get(i).getVenueName(), // gets the first value of the current row, venueName
-          hireVenue.get(i).getVenueCode(), // second value venueCode
-          hireVenue.get(i).getCapacityInput(), // third value capacityInput
-          hireVenue.get(i).getHireFeeInput()); // fourth value hireFeeInput
+          hireVenue.get(i).getVenueName(), // gets the corresponding venue i, and its name
+          hireVenue.get(i).getVenueCode(),
+          hireVenue.get(i).getCapacityInput(),
+          hireVenue.get(i).getHireFeeInput()); 
     }
   }
 
@@ -54,7 +55,8 @@ public class VenueHireSystem {
   }
 
   public void setSystemDate(String dateInput) {
-    // TODO implement this method
+    this.date = dateInput;
+    MessageCli.DATE_SET.printMessage(date);
   }
 
   public void printSystemDate() {
