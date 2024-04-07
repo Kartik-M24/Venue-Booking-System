@@ -107,16 +107,18 @@ public class VenueHireSystem {
 
   public void printBookings(String venueCode) {
     numberOfBookings = bookings.size();
+    numberOfVenues = hireVenue.size();
     boolean venueExists = false;
     String venueName = null;
 
-    for (int i = 0; i < numberOfBookings; i++) {
-      if (bookings.get(i).getBookingsVenueCode().equals(venueCode)) {
+    for (int i = 0; i < numberOfVenues; i++) {
+      if (hireVenue.get(i).getVenueCode().equals(venueCode)) {
         venueExists = true;
         venueName = hireVenue.get(i).getVenueName();
         break;
       }
     }
+
     if (venueExists == false) {
       MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
     } else {
