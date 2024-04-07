@@ -68,9 +68,14 @@ public class VenueHireSystem {
   }
 
   public void makeBooking(String[] options) {
+    numberOfVenues = hireVenue.size();
+
     // Outputting error message if booking conditions aren't met
     if (this.date == null) {
       MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
+    }
+    if (numberOfVenues == 0) {
+      MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
     }
   }
 
