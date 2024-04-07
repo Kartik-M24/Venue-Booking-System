@@ -1,5 +1,6 @@
 package nz.ac.auckland.se281;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
@@ -7,6 +8,7 @@ import nz.ac.auckland.se281.Types.FloralType;
 public class VenueHireSystem {
   // Instance Fields
   private ArrayList<Venue> hireVenue = new ArrayList<Venue>(); // Arraylist of valid Venues
+  private ArrayList<Booking> bookings = new ArrayList<Booking>(); // Arraylist of valid Bookings
   private Integer numberOfVenues;
   private String date;
 
@@ -68,49 +70,12 @@ public class VenueHireSystem {
   }
 
   public void makeBooking(String[] options) {
-    // Pre-setting and initialising variables
-    String venueCode = options[0];
-    String venueDate = options[1];
-    numberOfVenues = hireVenue.size();
-    boolean venueCodeExists = false;
-    int systemDay;
-    int systemMonth;
-    int systemYear;
+    Booking reservation = new Booking(); // Verifies Venue details and creates a new Venue object
 
-    for (int i = 0; i < numberOfVenues; i++) {
-      if (hireVenue.get(i).getVenueCode().equals(venueCode)) {
-        venueCodeExists = true;
-      }
-    }
-
-    // splitting the venue date into day, month, and year
-    String[] dateSplit = venueDate.split("/");
-    int day = Integer.parseInt(dateSplit[0]);
-    int month = Integer.parseInt(dateSplit[1]);
-    int year = Integer.parseInt(dateSplit[2]);
-
-    // Outputting error message if booking conditions aren't met
-    if (this.date == null) {
-      MessageCli.BOOKING_NOT_MADE_DATE_NOT_SET.printMessage();
-    } else {
-      // splitting the system date into day, month, and year (after confirming system date is set)
-      String[] systemDateSplit = this.date.split("/");
-      systemDay = Integer.parseInt(systemDateSplit[0]);
-      systemMonth = Integer.parseInt(systemDateSplit[1]);
-      systemYear = Integer.parseInt(systemDateSplit[2]);
-
-      // Check if the booking date is in the past
-      if (year < systemYear
-          || (year == systemYear && month < systemMonth)
-          || (year == systemYear && month == systemMonth && day < systemDay)) {
-        MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(venueDate, this.date);
-      }
-    }
-    if (numberOfVenues == 0) {
-      MessageCli.BOOKING_NOT_MADE_NO_VENUES.printMessage();
-    }
-    if (venueCodeExists == false) {
-      MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(venueCode);
+    // If the venue is valid, add it to the list of venues
+    if (reservation.validBooking(options, this.date, hireVenue) == true) {
+      bookings.add(reservation); // Adds venue to hireVenue
+      //MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
     }
   }
 
