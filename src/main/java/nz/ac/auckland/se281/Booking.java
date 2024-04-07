@@ -6,6 +6,7 @@ public class Booking {
   private String venueCode;
   private String venueDate;
   private String systemDate;
+  private String numberOfAttendees;
 
   public Booking() {}
 
@@ -14,6 +15,7 @@ public class Booking {
     // Pre-setting and initialising variables
     venueCode = options[0];
     venueDate = options[1];
+    numberOfAttendees = options[3];
     systemDate = date;
     int numberOfVenues = hireVenue.size();
     int numberOfBookings = bookings.size();
@@ -21,6 +23,7 @@ public class Booking {
     int systemDay;
     int systemMonth;
     int systemYear;
+    String venueCapacity = null;
     String venueName = null; // may cause issues
 
     // splitting the venue date into day, month, and year
@@ -29,9 +32,11 @@ public class Booking {
     int month = Integer.parseInt(dateSplit[1]);
     int year = Integer.parseInt(dateSplit[2]);
 
+    // Check if the venue code exists and then get the venue name and capacity
     for (int i = 0; i < numberOfVenues; i++) {
       if (hireVenue.get(i).getVenueCode().equals(venueCode)) {
         venueName = hireVenue.get(i).getVenueName();
+        venueCapacity = hireVenue.get(i).getCapacityInput();
         venueCodeExists = true;
       }
     }
@@ -67,6 +72,16 @@ public class Booking {
     }
     if (venueCodeExists == false) {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(venueCode);
+    }
+
+    // Adjustments for numberOfAtendess
+    if (Integer.parseInt(venueCapacity) < Integer.parseInt(numberOfAttendees)) {
+      MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
+          numberOfAttendees, venueCapacity, venueCapacity);
+    }
+    if (Integer.parseInt(numberOfAttendees) < (0.25 * Integer.parseInt(venueCapacity))) {
+      MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
+          numberOfAttendees, Integer.toString((int) (0.25 * Integer.parseInt(venueCapacity))), venueCapacity);
     }
 
     // If all conditions are met, create a new booking
