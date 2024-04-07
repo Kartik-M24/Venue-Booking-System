@@ -84,9 +84,11 @@ public class VenueHireSystem {
 
   public void makeBooking(String[] options) {
     Booking reservation = new Booking(); // Verifies Venue details and creates a new Venue object
+    String [] bookingDetails = new String[2];
+    bookingDetails = reservation.validBooking(options, this.date, hireVenue, bookings);
 
     // If the venue is valid, add it to the list of venues
-    if (reservation.validBooking(options, this.date, hireVenue, bookings) == true) {
+    if (bookingDetails[0].equals("1")) {
       bookings.add(reservation); // Adds reservation to bookings
 
       numberOfVenues = hireVenue.size();
@@ -96,7 +98,7 @@ public class VenueHireSystem {
         if (hireVenue.get(i).getVenueCode().equals(options[0])) {
           String venueName = hireVenue.get(i).getVenueName();
           MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
-              BookingReferenceGenerator.generateBookingReference(),
+              bookingDetails[1],
               venueName,
               options[1],
               options[3]);

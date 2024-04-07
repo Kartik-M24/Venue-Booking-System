@@ -23,7 +23,7 @@ public class Booking {
 
   public Booking() {}
 
-  public boolean validBooking(
+  public String[] validBooking(
       String[] options, String date, ArrayList<Venue> hireVenue, ArrayList<Booking> bookings) {
     // Pre-setting and initialising variables
     venueCode = options[0];
@@ -36,6 +36,7 @@ public class Booking {
     String venueCapacity = null;
     String venueName = null;
     this.bookings = bookings;
+    String[] Array = new String[2];
 
     // splitting the venue date into day, month, and year
     String[] dateSplit = venueDate.split("/");
@@ -100,10 +101,14 @@ public class Booking {
             venueCapacity);
         numberOfAttendees = (int) (0.25 * Integer.parseInt(venueCapacity));
       }
-
-      return true;
+      String bookingReference = BookingReferenceGenerator.generateBookingReference();
+      Array[0] = "1"; // 1 code for a successful booking
+      Array[1] = bookingReference;
+      return Array;
     } else {
-      return false;
+      Array[0] = "0"; // 0 code for an unsuccessful booking
+      Array[1] = null;
+      return Array;
     }
   }
 
