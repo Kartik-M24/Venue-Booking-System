@@ -6,7 +6,7 @@ public class Booking {
   private String venueCode;
   private String venueDate;
   private String systemDate;
-  private String numberOfAttendees;
+  private int numberOfAttendees;
 
   public Booking() {}
 
@@ -15,7 +15,7 @@ public class Booking {
     // Pre-setting and initialising variables
     venueCode = options[0];
     venueDate = options[1];
-    numberOfAttendees = options[3];
+    numberOfAttendees = Integer.parseInt(options[3]);
     systemDate = date;
     int numberOfVenues = hireVenue.size();
     int numberOfBookings = bookings.size();
@@ -74,18 +74,21 @@ public class Booking {
       MessageCli.BOOKING_NOT_MADE_VENUE_NOT_FOUND.printMessage(venueCode);
     }
 
-    // Adjustments for numberOfAtendess
-    if (Integer.parseInt(venueCapacity) < Integer.parseInt(numberOfAttendees)) {
-      MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
-          numberOfAttendees, venueCapacity, venueCapacity);
-    }
-    if (Integer.parseInt(numberOfAttendees) < (0.25 * Integer.parseInt(venueCapacity))) {
-      MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
-          numberOfAttendees, Integer.toString((int) (0.25 * Integer.parseInt(venueCapacity))), venueCapacity);
-    }
-
     // If all conditions are met, create a new booking
     if (systemDate != null && numberOfVenues != 0 && venueCodeExists == true && venueDate != null) {
+      // Adjustments for numberOfAtendess
+      if (Integer.parseInt(venueCapacity) < numberOfAttendees) {
+        MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
+            Integer.toString(numberOfAttendees), venueCapacity, venueCapacity);
+        numberOfAttendees = Integer.parseInt(venueCapacity);
+      }
+      if (numberOfAttendees < (0.25 * Integer.parseInt(venueCapacity))) {
+        MessageCli.BOOKING_ATTENDEES_ADJUSTED.printMessage(
+            Integer.toString(numberOfAttendees),
+            Integer.toString((int) (0.25 * Integer.parseInt(venueCapacity))),
+            venueCapacity);
+        numberOfAttendees = (int) (0.25 * Integer.parseInt(venueCapacity));
+      }
       return true;
     } else {
       return false;
