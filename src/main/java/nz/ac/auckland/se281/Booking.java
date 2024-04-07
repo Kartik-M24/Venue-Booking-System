@@ -46,8 +46,8 @@ public class Booking {
       if (year < systemYear
           || (year == systemYear && month < systemMonth)
           || (year == systemYear && month == systemMonth && day < systemDay)) {
-        venueDate = null;
         MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(venueDate, systemDate);
+        venueDate = null;
       }
     }
     if (numberOfVenues == 0) {
