@@ -10,6 +10,7 @@ import java.util.TreeMap;
 public class Booking {
   private String venueCode;
   private String venueDate;
+  private String bookingReference;
   private String systemDate;
   private ArrayList<String> bookingDatesList = new ArrayList<String>();
   private ArrayList<Booking> bookings = new ArrayList<Booking>();
@@ -101,7 +102,7 @@ public class Booking {
             venueCapacity);
         numberOfAttendees = (int) (0.25 * Integer.parseInt(venueCapacity));
       }
-      String bookingReference = BookingReferenceGenerator.generateBookingReference();
+      bookingReference = BookingReferenceGenerator.generateBookingReference();
       Array[0] = "1"; // 1 code for a successful booking
       Array[1] = bookingReference;
       return Array;
@@ -110,6 +111,9 @@ public class Booking {
       Array[1] = null;
       return Array;
     }
+  }
+  public String getBookingsReference() {
+    return bookingReference;
   }
 
   public String getBookingsVenueCode() {
