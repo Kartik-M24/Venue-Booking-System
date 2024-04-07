@@ -9,15 +9,16 @@ public class VenueHireSystem {
   private ArrayList<Venue> hireVenue = new ArrayList<Venue>(); // Arraylist of valid Venues
   private ArrayList<Booking> bookings = new ArrayList<Booking>(); // Arraylist of valid Bookings
   private Integer numberOfVenues;
+  private Integer numberOfBookings;
   private String date;
-  private String nextAvailableDate;
+  private String availableDate;
 
   public VenueHireSystem() {}
 
   public void printVenues() {
     // Pre-setting variables
     numberOfVenues = hireVenue.size();
-    nextAvailableDate = this.date;
+    numberOfBookings = bookings.size();
     String[] numberInWords = {
       "two", "three", "four", "five", "six", "seven", "eight", "nine"
     }; // called when total venues being displayed is between 2-9 inclusive
@@ -38,12 +39,22 @@ public class VenueHireSystem {
 
     // Print list of already booked Venues (and their details)
     for (int i = 0; i < numberOfVenues; i++) {
+      availableDate = this.date;
+      if (numberOfBookings > 0) {
+        for (int j = 0; j < numberOfBookings; j++) {
+          if (hireVenue.get(i).getVenueCode().equals(bookings.get(j).getBookingsVenueCode())) {
+            availableDate = bookings.get(j).getNextAvailableDate(availableDate);
+          }
+          System.out.println(hireVenue.get(i).getVenueCode());
+          System.out.println(bookings.get(j).getBookingsVenueCode());
+        }
+      } 
       MessageCli.VENUE_ENTRY.printMessage(
           hireVenue.get(i).getVenueName(), // gets the corresponding venue i, and its name
           hireVenue.get(i).getVenueCode(),
           hireVenue.get(i).getCapacityInput(),
           hireVenue.get(i).getHireFeeInput(),
-          nextAvailableDate);
+          availableDate);
     }
   }
 

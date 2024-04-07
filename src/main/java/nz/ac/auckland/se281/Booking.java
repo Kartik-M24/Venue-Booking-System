@@ -1,15 +1,25 @@
 package nz.ac.auckland.se281;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Booking {
   private String venueCode;
   private String venueDate;
   private String systemDate;
+  private ArrayList<String> bookingDatesList = new ArrayList<String>();
+  private ArrayList<Booking> bookings = new ArrayList<Booking>();
   private int numberOfAttendees;
   private int day;
   private int month;
   private int year;
+  private int systemDay;
+  private int systemMonth;
+  private int systemYear;
 
   public Booking() {}
 
@@ -23,11 +33,9 @@ public class Booking {
     int numberOfVenues = hireVenue.size();
     int numberOfBookings = bookings.size();
     boolean venueCodeExists = false;
-    int systemDay;
-    int systemMonth;
-    int systemYear;
     String venueCapacity = null;
-    String venueName = null; // may cause issues
+    String venueName = null;
+    this.bookings = bookings;
 
     // splitting the venue date into day, month, and year
     String[] dateSplit = venueDate.split("/");
@@ -92,6 +100,7 @@ public class Booking {
             venueCapacity);
         numberOfAttendees = (int) (0.25 * Integer.parseInt(venueCapacity));
       }
+
       return true;
     } else {
       return false;
@@ -106,14 +115,38 @@ public class Booking {
     return venueDate;
   }
 
-  public String getNextAvailableDate() {
-    if (venueDate == null) { // not configured correctly currently
-      venueDate = systemDate;
-      return venueDate;
-    } else {
-      day++;
-      String outputDate = day + "/" + month + "/" + year;
-      return outputDate;
+  public String getNextAvailableDate(String inputDate) {
+    // Initialising variables
+    String availableDate = inputDate;
+    bookingDatesList.clear();
+    String[] availableDateSplit = availableDate.split("/");
+    int availableDay = Integer.parseInt(availableDateSplit[0]);
+    int numberOfBookings = bookings.size();
+
+    // Creating a list of all booking dates
+    for (int i = 0; i < numberOfBookings; i++) {
+      bookingDatesList.add(this.bookings.get(i).getBookingsVenueDate());
     }
+
+    // Orders booking Dates list from earliest to latest
+    DateTimeFormatter dfm = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    Map<LocalDate, String> dateFormatMap = new TreeMap<>();
+    bookingDatesList.forEach(s -> dateFormatMap.put(LocalDate.parse(s, dfm), s));
+    List<String> bookingDatesList = new ArrayList<>(dateFormatMap.values());
+
+    int datesListSize = bookingDatesList.size();
+
+    // Checks if any other bookings are on the same day and increments the available date
+    // accordingly
+    for (int i = 0; i < datesListSize; i++) {
+      if (bookingDatesList.get(i).equals(availableDate)) {
+        if (availableDay >= 9) {
+          availableDate = (availableDay + 1) + "/0" + systemMonth + "/" + systemYear;
+        } else {
+          availableDate = "0" + (availableDay + 1) + "/0" + systemMonth + "/" + systemYear;
+        }
+      }
+    }
+    return availableDate;
   }
 }
