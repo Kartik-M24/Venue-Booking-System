@@ -1,6 +1,5 @@
 package nz.ac.auckland.se281;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import nz.ac.auckland.se281.Types.CateringType;
 import nz.ac.auckland.se281.Types.FloralType;
@@ -11,12 +10,14 @@ public class VenueHireSystem {
   private ArrayList<Booking> bookings = new ArrayList<Booking>(); // Arraylist of valid Bookings
   private Integer numberOfVenues;
   private String date;
+  private String nextAvailableDate;
 
   public VenueHireSystem() {}
 
   public void printVenues() {
     // Pre-setting variables
     numberOfVenues = hireVenue.size();
+    nextAvailableDate = this.date;
     String[] numberInWords = {
       "two", "three", "four", "five", "six", "seven", "eight", "nine"
     }; // called when total venues being displayed is between 2-9 inclusive
@@ -41,7 +42,8 @@ public class VenueHireSystem {
           hireVenue.get(i).getVenueName(), // gets the corresponding venue i, and its name
           hireVenue.get(i).getVenueCode(),
           hireVenue.get(i).getCapacityInput(),
-          hireVenue.get(i).getHireFeeInput());
+          hireVenue.get(i).getHireFeeInput(),
+          nextAvailableDate);
     }
   }
 
@@ -77,16 +79,18 @@ public class VenueHireSystem {
       bookings.add(reservation); // Adds reservation to bookings
 
       numberOfVenues = hireVenue.size();
-      
+
       // Find the venueName via the venueCode
       for (int i = 0; i < numberOfVenues; i++) {
         if (hireVenue.get(i).getVenueCode().equals(options[0])) {
           String venueName = hireVenue.get(i).getVenueName();
           MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
-        BookingReferenceGenerator.generateBookingReference(), venueName, options[1], options[3]);
+              BookingReferenceGenerator.generateBookingReference(),
+              venueName,
+              options[1],
+              options[3]);
         }
       }
-
     }
   }
 

@@ -7,6 +7,9 @@ public class Booking {
   private String venueDate;
   private String systemDate;
   private int numberOfAttendees;
+  private int day;
+  private int month;
+  private int year;
 
   public Booking() {}
 
@@ -28,9 +31,9 @@ public class Booking {
 
     // splitting the venue date into day, month, and year
     String[] dateSplit = venueDate.split("/");
-    int day = Integer.parseInt(dateSplit[0]);
-    int month = Integer.parseInt(dateSplit[1]);
-    int year = Integer.parseInt(dateSplit[2]);
+    day = Integer.parseInt(dateSplit[0]);
+    month = Integer.parseInt(dateSplit[1]);
+    year = Integer.parseInt(dateSplit[2]);
 
     // Check if the venue code exists and then get the venue name and capacity
     for (int i = 0; i < numberOfVenues; i++) {
@@ -101,5 +104,16 @@ public class Booking {
 
   public String getBookingsVenueDate() {
     return venueDate;
+  }
+
+  public String getNextAvailableDate() {
+    if (venueDate == null) { // not configured correctly currently
+      venueDate = systemDate;
+      return venueDate;
+    } else {
+      day++;
+      String outputDate = day + "/" + month + "/" + year;
+      return outputDate;
+    }
   }
 }
