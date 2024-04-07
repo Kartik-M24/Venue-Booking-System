@@ -75,7 +75,16 @@ public class VenueHireSystem {
     // If the venue is valid, add it to the list of venues
     if (reservation.validBooking(options, this.date, hireVenue) == true) {
       bookings.add(reservation); // Adds venue to hireVenue
-      //MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
+
+      String venueName = null;
+      // Find the venueName via the venueCode
+      for (int i = 0; i < numberOfVenues; i++) {
+        if (hireVenue.get(i).getVenueCode().equals(options[1])) {
+          venueName = hireVenue.get(i).getVenueName();
+        }
+      }
+      MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
+        BookingReferenceGenerator.generateBookingReference(), venueName, options[1], options[3]);
     }
   }
 

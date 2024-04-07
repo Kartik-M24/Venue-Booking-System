@@ -3,14 +3,17 @@ package nz.ac.auckland.se281;
 import java.util.ArrayList;
 
 public class Booking {
+  private String venueCode;
+  private String venueDate;
+  private String systemDate;
 
   public Booking() {}
 
   public boolean validBooking(String[] options, String date, ArrayList<Venue> hireVenue) {
     // Pre-setting and initialising variables
-    String venueCode = options[0];
-    String venueDate = options[1];
-    String systemDate = date;
+    venueCode = options[0];
+    venueDate = options[1];
+    systemDate = date;
     int numberOfVenues = hireVenue.size();
     boolean venueCodeExists = false;
     int systemDay;
@@ -43,6 +46,7 @@ public class Booking {
       if (year < systemYear
           || (year == systemYear && month < systemMonth)
           || (year == systemYear && month == systemMonth && day < systemDay)) {
+        venueDate = null;
         MessageCli.BOOKING_NOT_MADE_PAST_DATE.printMessage(venueDate, systemDate);
       }
     }
@@ -54,6 +58,10 @@ public class Booking {
     }
 
     // If all conditions are met, create a new booking
+    if (systemDate != null && numberOfVenues != 0 && venueCodeExists == true && venueDate != null) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
-
