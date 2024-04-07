@@ -73,10 +73,9 @@ public class VenueHireSystem {
     Booking reservation = new Booking(); // Verifies Venue details and creates a new Venue object
 
     // If the venue is valid, add it to the list of venues
-    if (reservation.validBooking(options, this.date, hireVenue) == true) {
+    if (reservation.validBooking(options, this.date, hireVenue, bookings) == true) {
       bookings.add(reservation); // Adds reservation to bookings
 
-      //String venueName = null;
       numberOfVenues = hireVenue.size();
       
       // Find the venueName via the venueCode

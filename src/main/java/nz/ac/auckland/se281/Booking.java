@@ -9,28 +9,40 @@ public class Booking {
 
   public Booking() {}
 
-  public boolean validBooking(String[] options, String date, ArrayList<Venue> hireVenue) {
+  public boolean validBooking(
+      String[] options, String date, ArrayList<Venue> hireVenue, ArrayList<Booking> bookings) {
     // Pre-setting and initialising variables
     venueCode = options[0];
     venueDate = options[1];
     systemDate = date;
     int numberOfVenues = hireVenue.size();
+    int numberOfBookings = bookings.size();
     boolean venueCodeExists = false;
     int systemDay;
     int systemMonth;
     int systemYear;
-
-    for (int i = 0; i < numberOfVenues; i++) {
-      if (hireVenue.get(i).getVenueCode().equals(venueCode)) {
-        venueCodeExists = true;
-      }
-    }
+    String venueName = null; // may cause issues
 
     // splitting the venue date into day, month, and year
     String[] dateSplit = venueDate.split("/");
     int day = Integer.parseInt(dateSplit[0]);
     int month = Integer.parseInt(dateSplit[1]);
     int year = Integer.parseInt(dateSplit[2]);
+
+    for (int i = 0; i < numberOfVenues; i++) {
+      if (hireVenue.get(i).getVenueCode().equals(venueCode)) {
+        venueName = hireVenue.get(i).getVenueName();
+        venueCodeExists = true;
+      }
+    }
+
+    for (int i = 0; i < numberOfBookings; i++) {
+      if (bookings.get(i).getBookingsVenueCode().equals(venueCode)
+          && bookings.get(i).getBookingsVenueDate().equals(venueDate)) {
+        MessageCli.BOOKING_NOT_MADE_VENUE_ALREADY_BOOKED.printMessage(venueName, venueDate);
+        venueDate = null;
+      }
+    }
 
     // Outputting error message if booking conditions aren't met
     if (systemDate == null) {
@@ -63,5 +75,13 @@ public class Booking {
     } else {
       return false;
     }
+  }
+
+  public String getBookingsVenueCode() {
+    return venueCode;
+  }
+
+  public String getBookingsVenueDate() {
+    return venueDate;
   }
 }
