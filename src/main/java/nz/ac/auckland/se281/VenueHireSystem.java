@@ -106,7 +106,33 @@ public class VenueHireSystem {
   }
 
   public void printBookings(String venueCode) {
-    // TODO implement this method
+    numberOfBookings = bookings.size();
+    boolean venueExists = false;
+    String venueName = null;
+
+    for (int i = 0; i < numberOfBookings; i++) {
+      if (bookings.get(i).getBookingsVenueCode().equals(venueCode)) {
+        venueExists = true;
+        venueName = hireVenue.get(i).getVenueName();
+        break;
+      }
+    }
+    if (venueExists == false) {
+      MessageCli.PRINT_BOOKINGS_VENUE_NOT_FOUND.printMessage(venueCode);
+    } else {
+      MessageCli.PRINT_BOOKINGS_HEADER.printMessage(venueName);
+      int bookingsEntry = 0;
+      for (int i = 0; i < numberOfBookings; i++) {
+        if (bookings.get(i).getBookingsVenueCode().equals(venueCode)) {
+          bookingsEntry++;
+          MessageCli.PRINT_BOOKINGS_ENTRY.printMessage(
+              bookings.get(i).getBookingsVenueDate(), bookings.get(i).getBookingsVenueDate()); //get venue reference code instead
+        }
+      }
+      if (bookingsEntry == 0) {
+        MessageCli.PRINT_BOOKINGS_NONE.printMessage(venueName);
+      }
+    }
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
