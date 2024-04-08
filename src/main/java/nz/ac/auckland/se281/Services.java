@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public abstract class Services {
   // Instance Fields
-  String bookingReference;
-  ArrayList<Booking> bookings = new ArrayList<Booking>();
+  protected String bookingReference;
+  protected ArrayList<Booking> bookings = new ArrayList<Booking>();
 
   // Constructor
   public Services(String bookingReference, ArrayList<Booking> inputBookings) {

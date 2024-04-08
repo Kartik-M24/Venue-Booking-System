@@ -160,6 +160,7 @@ public class VenueHireSystem {
             bookingReference,
             cateringType,
             bookings); // Verifies Catering details and creates a new Catering object
+    // Gets catering details
     cateringName = cateringType.getName();
     cateringCost = cateringType.getCostPerPerson();
 
@@ -183,10 +184,12 @@ public class VenueHireSystem {
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
-    Floral addFloral = new Floral(bookingReference, floralType, bookings);
+    FloralService addFloral = new FloralService(bookingReference, floralType, bookings);
+    // Gets floral details
     floralName = floralType.getName();
     floralCost = floralType.getCost();
 
+    // Checks if the booking reference is valid and accordingly prints the appropriate message
     if (addFloral.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     } else {
@@ -211,7 +214,9 @@ public class VenueHireSystem {
     if (invoice.checkBookingReference() == false) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     } else {
-      invoice.printInvoice();
+      invoice
+          .printInvoice(); // This method gets values from the bookings and hireVenues arraylists
+                           // required for the invoice
     }
   }
 }
