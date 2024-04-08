@@ -24,7 +24,7 @@ public class Booking {
 
   public Booking() {}
 
-  public String[] validBooking(
+  public String[] checkValidBooking(
       String[] options, String date, ArrayList<Venue> hireVenue, ArrayList<Booking> bookings) {
     // Pre-setting and initialising variables
     venueCode = options[0];
@@ -37,7 +37,7 @@ public class Booking {
     String venueCapacity = null;
     String venueName = null;
     this.bookings = bookings;
-    String[] Array = new String[2];
+    String[] outputArray = new String[2];
 
     // splitting the venue date into day, month, and year
     String[] dateSplit = venueDate.split("/");
@@ -103,13 +103,13 @@ public class Booking {
         numberOfAttendees = (int) (0.25 * Integer.parseInt(venueCapacity));
       }
       bookingReference = BookingReferenceGenerator.generateBookingReference();
-      Array[0] = "1"; // 1 code for a successful booking
-      Array[1] = bookingReference;
-      return Array;
+      outputArray[0] = "1"; // 1 code for a successful booking
+      outputArray[1] = bookingReference;
+      return outputArray;
     } else {
-      Array[0] = "0"; // 0 code for an unsuccessful booking
-      Array[1] = null;
-      return Array;
+      outputArray[0] = "0"; // 0 code for an unsuccessful booking
+      outputArray[1] = null;
+      return outputArray;
     }
   }
 
@@ -129,10 +129,10 @@ public class Booking {
     return venueDate;
   }
 
-  public String getNextAvailableDate(String inputDate, String inputVC) {
+  public String getNextAvailableDate(String inputDate, String inputCode) {
     // Initialising variables
     String availableDate = inputDate;
-    String inputVenueCode = inputVC;
+    String inputVenueCode = inputCode;
     bookingDatesList.clear();
     String[] availableDateSplit = availableDate.split("/");
     int availableDay = Integer.parseInt(availableDateSplit[0]);

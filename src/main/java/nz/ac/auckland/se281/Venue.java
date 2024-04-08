@@ -11,7 +11,7 @@ public class Venue {
 
   public Venue() {}
 
-  public boolean validVenue(
+  public boolean checkValidVenue(
       String venueName,
       String venueCode,
       String capacityInput,

@@ -43,7 +43,10 @@ public class VenueHireSystem {
       if (numberOfBookings > 0) {
         for (int j = 0; j < numberOfBookings; j++) {
           if (hireVenue.get(i).getVenueCode().equals(bookings.get(j).getBookingsVenueCode())) {
-            availableDate = bookings.get(j).getNextAvailableDate(availableDate, hireVenue.get(i).getVenueCode());
+            availableDate =
+                bookings
+                    .get(j)
+                    .getNextAvailableDate(availableDate, hireVenue.get(i).getVenueCode());
           }
         }
       }
@@ -61,7 +64,8 @@ public class VenueHireSystem {
     Venue booking = new Venue(); // Verifies Venue details and creates a new Venue object
 
     // If the venue is valid, add it to the list of venues
-    if (booking.validVenue(venueName, venueCode, capacityInput, hireFeeInput, hireVenue) == true) {
+    if (booking.checkValidVenue(venueName, venueCode, capacityInput, hireFeeInput, hireVenue)
+        == true) {
       hireVenue.add(booking); // Adds venue to hireVenue
       MessageCli.VENUE_SUCCESSFULLY_CREATED.printMessage(venueName, venueCode);
     }
@@ -83,7 +87,7 @@ public class VenueHireSystem {
   public void makeBooking(String[] options) {
     Booking reservation = new Booking(); // Verifies Venue details and creates a new Venue object
     String[] bookingDetails = new String[2];
-    bookingDetails = reservation.validBooking(options, this.date, hireVenue, bookings);
+    bookingDetails = reservation.checkValidBooking(options, this.date, hireVenue, bookings);
 
     // If the venue is valid, add it to the list of venues
     if (bookingDetails[0].equals("1")) {
