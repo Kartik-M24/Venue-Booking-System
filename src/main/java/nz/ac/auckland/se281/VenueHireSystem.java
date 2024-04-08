@@ -150,7 +150,14 @@ public class VenueHireSystem {
   }
 
   public void addCateringService(String bookingReference, CateringType cateringType) {
-    // TODO implement this method
+    Catering addCatering =
+        new Catering(
+            bookingReference,
+            cateringType,
+            bookings); // Verifies Catering details and creates a new Catering object
+    if (addCatering.checkBookingReference() == false) {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
+    }
   }
 
   public void addServiceMusic(String bookingReference) {
