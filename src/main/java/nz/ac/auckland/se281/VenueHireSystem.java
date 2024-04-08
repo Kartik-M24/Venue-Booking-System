@@ -158,6 +158,9 @@ public class VenueHireSystem {
     if (addCatering.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     }
+    else {
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Catering", bookingReference);
+    }
   }
 
   public void addServiceMusic(String bookingReference) {
@@ -165,12 +168,18 @@ public class VenueHireSystem {
     if (addMusic.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
     }
+    else {
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
+    }
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
     Floral addFloral = new Floral(bookingReference, floralType, bookings);
     if (addFloral.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
+    }
+    else {
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Floral", bookingReference);
     }
   }
 
