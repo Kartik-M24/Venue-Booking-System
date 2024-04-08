@@ -1,7 +1,6 @@
 package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
-
 import nz.ac.auckland.se281.Types.FloralType;
 
 class Floral extends Services {

@@ -163,7 +163,7 @@ public class VenueHireSystem {
     cateringName = cateringType.getName();
     cateringCost = cateringType.getCostPerPerson();
 
-    if (addCatering.checkBookingReference(bookingReference) == false) {
+    if (addCatering.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     } else {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
@@ -175,7 +175,7 @@ public class VenueHireSystem {
     Music addMusic = new Music(bookingReference, bookings);
     musicCost = addMusic.getMusicCost();
 
-    if (addMusic.checkBookingReference(bookingReference) == false) {
+    if (addMusic.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
     } else {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
@@ -187,7 +187,7 @@ public class VenueHireSystem {
     floralName = floralType.getName();
     floralCost = floralType.getCost();
 
-    if (addFloral.checkBookingReference(bookingReference) == false) {
+    if (addFloral.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     } else {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
@@ -208,7 +208,7 @@ public class VenueHireSystem {
             floralCost,
             musicCost);
 
-    if (invoice.checkBookingReference(bookingReference) == false) {
+    if (invoice.checkBookingReference() == false) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     } else {
       invoice.printInvoice();
