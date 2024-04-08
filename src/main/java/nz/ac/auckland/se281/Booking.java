@@ -112,8 +112,13 @@ public class Booking {
       return Array;
     }
   }
+
   public String getBookingsReference() {
     return bookingReference;
+  }
+
+  public String getNumberOfAttendees() {
+    return Integer.toString(numberOfAttendees);
   }
 
   public String getBookingsVenueCode() {
@@ -124,9 +129,10 @@ public class Booking {
     return venueDate;
   }
 
-  public String getNextAvailableDate(String inputDate) {
+  public String getNextAvailableDate(String inputDate, String inputVC) {
     // Initialising variables
     String availableDate = inputDate;
+    String inputVenueCode = inputVC;
     bookingDatesList.clear();
     String[] availableDateSplit = availableDate.split("/");
     int availableDay = Integer.parseInt(availableDateSplit[0]);
@@ -134,17 +140,25 @@ public class Booking {
 
     // Creating a list of all booking dates
     for (int i = 0; i < numberOfBookings; i++) {
-      bookingDatesList.add(this.bookings.get(i).getBookingsVenueDate());
+      if (this.bookings
+          .get(i)
+          .getBookingsVenueCode()
+          .equals(inputVenueCode)) { // Adds booking to list if it is for the same venue
+        bookingDatesList.add(this.bookings.get(i).getBookingsVenueDate());
+      }
     }
 
     // Orders booking Dates list from earliest to latest
-    DateTimeFormatter dfm = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+    // Note following code is taken from
+    // https://www.baeldung.com/java-sort-date-strings#using-a-treemap
+    // (5. Using a TreeMap) and modified to fit the context of the Booking class
+    DateTimeFormatter dfm = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     Map<LocalDate, String> dateFormatMap = new TreeMap<>();
-    bookingDatesList.forEach(s -> dateFormatMap.put(LocalDate.parse(s, dfm), s));
-    List<String> bookingDatesList = new ArrayList<>(dateFormatMap.values());
+    bookingDatesList.forEach(string -> dateFormatMap.put(LocalDate.parse(string, dfm), string));
+    List<String> bookingDatesList =
+        new ArrayList<>(dateFormatMap.values()); // reassign ordered list to bookingDatesList
 
     int datesListSize = bookingDatesList.size();
-
     // Checks if any other bookings are on the same day and increments the available date
     // accordingly
     for (int i = 0; i < datesListSize; i++) {

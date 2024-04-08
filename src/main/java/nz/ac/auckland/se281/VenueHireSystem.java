@@ -43,12 +43,10 @@ public class VenueHireSystem {
       if (numberOfBookings > 0) {
         for (int j = 0; j < numberOfBookings; j++) {
           if (hireVenue.get(i).getVenueCode().equals(bookings.get(j).getBookingsVenueCode())) {
-            availableDate = bookings.get(j).getNextAvailableDate(availableDate);
+            availableDate = bookings.get(j).getNextAvailableDate(availableDate, hireVenue.get(i).getVenueCode());
           }
-          System.out.println(hireVenue.get(i).getVenueCode());
-          System.out.println(bookings.get(j).getBookingsVenueCode());
         }
-      } 
+      }
       MessageCli.VENUE_ENTRY.printMessage(
           hireVenue.get(i).getVenueName(), // gets the corresponding venue i, and its name
           hireVenue.get(i).getVenueCode(),
@@ -84,7 +82,7 @@ public class VenueHireSystem {
 
   public void makeBooking(String[] options) {
     Booking reservation = new Booking(); // Verifies Venue details and creates a new Venue object
-    String [] bookingDetails = new String[2];
+    String[] bookingDetails = new String[2];
     bookingDetails = reservation.validBooking(options, this.date, hireVenue, bookings);
 
     // If the venue is valid, add it to the list of venues
@@ -92,18 +90,24 @@ public class VenueHireSystem {
       bookings.add(reservation); // Adds reservation to bookings
 
       numberOfVenues = hireVenue.size();
+      numberOfBookings = bookings.size();
+      String venueName = null;
+      String venueAttendees = null;
 
       // Find the venueName via the venueCode
       for (int i = 0; i < numberOfVenues; i++) {
         if (hireVenue.get(i).getVenueCode().equals(options[0])) {
-          String venueName = hireVenue.get(i).getVenueName();
-          MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
-              bookingDetails[1],
-              venueName,
-              options[1],
-              options[3]);
+          venueName = hireVenue.get(i).getVenueName();
         }
       }
+      for (int i = 0; i < numberOfBookings; i++) {
+        if (bookings.get(i).getBookingsVenueCode().equals(options[0])) {
+          venueAttendees = bookings.get(i).getNumberOfAttendees();
+        }
+      }
+
+      MessageCli.MAKE_BOOKING_SUCCESSFUL.printMessage(
+          bookingDetails[1], venueName, options[1], venueAttendees);
     }
   }
 
