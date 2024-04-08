@@ -13,9 +13,4 @@ class Catering extends Services {
     super(bookingReference, bookings);
     this.cateringType = cateringType;
   }
-
-  @Override
-  public boolean checkBookingReference() {
-    return super.checkBookingReference();
-  }
 }
