@@ -12,11 +12,11 @@ public class VenueHireSystem {
   private Integer numberOfBookings;
   private String systemDate;
   private String availableDate;
-  private String floralName;
-  private String cateringName;
-  private int floralCost;
-  private int cateringCost;
-  private int musicCost;
+  private String floralName = null;
+  private String cateringName = null;
+  private int floralCost = 0;
+  private int cateringCost = 0;
+  private int musicCost = 0;
 
   public VenueHireSystem() {}
 
@@ -163,7 +163,7 @@ public class VenueHireSystem {
     cateringName = cateringType.getName();
     cateringCost = cateringType.getCostPerPerson();
 
-    if (addCatering.checkBookingReference() == false) {
+    if (addCatering.checkBookingReference(bookingReference) == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     } else {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
@@ -175,7 +175,7 @@ public class VenueHireSystem {
     Music addMusic = new Music(bookingReference, bookings);
     musicCost = addMusic.getMusicCost();
 
-    if (addMusic.checkBookingReference() == false) {
+    if (addMusic.checkBookingReference(bookingReference) == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
     } else {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Music", bookingReference);
@@ -187,7 +187,7 @@ public class VenueHireSystem {
     floralName = floralType.getName();
     floralCost = floralType.getCost();
 
-    if (addFloral.checkBookingReference() == false) {
+    if (addFloral.checkBookingReference(bookingReference) == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     } else {
       MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
@@ -208,7 +208,7 @@ public class VenueHireSystem {
             floralCost,
             musicCost);
 
-    if (invoice.checkBookingReference() == false) {
+    if (invoice.checkBookingReference(bookingReference) == false) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     } else {
       invoice.printInvoice();

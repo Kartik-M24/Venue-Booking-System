@@ -13,12 +13,7 @@ public abstract class Services {
     this.bookings = inputBookings;
   }
 
-  // Constructor
-  public Services(String bookingReference) {
-    this.bookingReference = bookingReference;
-  }
-
-  public boolean checkBookingReference() {
+  public boolean checkBookingReference(String bookingReference) {
     int numberOfBookings = bookings.size();
     boolean validReference = false;
     for (int i = 0; i < numberOfBookings; i++) {
