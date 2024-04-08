@@ -6,5 +6,11 @@ class Music extends Services {
 
   public Music(String bookingReference, ArrayList<Booking> inputBookings) {
     super(bookingReference, inputBookings);
-    //TODO Auto-generated constructor stub
-  }}
+    
+  }
+
+  public int getCost() {
+    return 500;
+  }
+
+}

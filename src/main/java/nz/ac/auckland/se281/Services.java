@@ -23,4 +23,6 @@ public abstract class Services {
     }
     return validReference;
   }
+  
+  public abstract int getCost();
 }
