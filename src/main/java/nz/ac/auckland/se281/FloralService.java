@@ -7,7 +7,8 @@ class FloralService extends Services {
   // Instance Fields
   private FloralType floralType;
 
-  public FloralService(String bookingReference, FloralType floralType, ArrayList<Booking> inputBookings) {
+  public FloralService(
+      String bookingReference, FloralType floralType, ArrayList<Booking> inputBookings) {
     super(bookingReference, inputBookings);
     this.floralType = floralType;
   }

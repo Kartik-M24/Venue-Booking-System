@@ -214,9 +214,8 @@ public class VenueHireSystem {
     if (invoice.checkBookingReference() == false) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     } else {
-      invoice
-          .printInvoice(); // This method gets values from the bookings and hireVenues arraylists
-                           // required for the invoice
+      invoice.printInvoice(); // This method gets values from the bookings and hireVenues arraylists
+      // required for the invoice
     }
   }
 }
