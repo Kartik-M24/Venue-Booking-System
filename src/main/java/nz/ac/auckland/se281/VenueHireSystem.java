@@ -177,7 +177,7 @@ public class VenueHireSystem {
     if (addFloral.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     } else {
-      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Floral", bookingReference);
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Floral (" + floralType.getName() + ")", bookingReference);
     }
   }
 
