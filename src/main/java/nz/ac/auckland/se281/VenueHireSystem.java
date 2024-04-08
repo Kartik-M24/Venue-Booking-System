@@ -177,11 +177,17 @@ public class VenueHireSystem {
     if (addFloral.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     } else {
-      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage("Floral (" + floralType.getName() + ")", bookingReference);
+      MessageCli.ADD_SERVICE_SUCCESSFUL.printMessage(
+          "Floral (" + floralType.getName() + ")", bookingReference);
     }
   }
 
   public void viewInvoice(String bookingReference) {
-    // TODO implement this method
+    Invoice invoice = new Invoice(bookingReference, bookings);
+    if (invoice.checkBookingReference() == false) {
+      MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
+    } else {
+      invoice.printInvoice();
+    }
   }
 }

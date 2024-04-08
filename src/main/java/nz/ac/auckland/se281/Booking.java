@@ -21,6 +21,8 @@ public class Booking {
   private int systemDay;
   private int systemMonth;
   private int systemYear;
+  private String clientEmail;
+  private String venueName;
 
   public Booking() {}
 
@@ -29,13 +31,13 @@ public class Booking {
     // Pre-setting and initialising variables
     venueCode = options[0];
     venueDate = options[1];
+    clientEmail = options[2];
     numberOfAttendees = Integer.parseInt(options[3]);
     systemDate = date;
     int numberOfVenues = hireVenue.size();
     int numberOfBookings = bookings.size();
     boolean venueCodeExists = false;
     String venueCapacity = null;
-    String venueName = null;
     this.bookings = bookings;
     String[] outputArray = new String[2];
 
@@ -113,6 +115,10 @@ public class Booking {
     }
   }
 
+  public String getVenueName() {
+    return venueName;
+  }
+
   public String getBookingsReference() {
     return bookingReference;
   }
@@ -127,6 +133,10 @@ public class Booking {
 
   public String getBookingsVenueDate() {
     return venueDate;
+  }
+
+  public String getClientEmail() {
+    return clientEmail;
   }
 
   public String getNextAvailableDate(String inputDate, String inputCode) {
