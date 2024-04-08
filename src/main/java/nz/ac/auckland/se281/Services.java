@@ -6,12 +6,13 @@ public abstract class Services {
   // Instance Fields
   String bookingReference;
   ArrayList<Booking> bookings = new ArrayList<Booking>();
-  
+
   // Constructor
   public Services(String bookingReference, ArrayList<Booking> inputBookings) {
     this.bookingReference = bookingReference;
     this.bookings = inputBookings;
   }
+
   // Constructor
   public Services(String bookingReference) {
     this.bookingReference = bookingReference;
@@ -27,6 +28,4 @@ public abstract class Services {
     }
     return validReference;
   }
-
-  public abstract int getCost();
 }

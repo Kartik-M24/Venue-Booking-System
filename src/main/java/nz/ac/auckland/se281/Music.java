@@ -6,11 +6,9 @@ class Music extends Services {
 
   public Music(String bookingReference, ArrayList<Booking> inputBookings) {
     super(bookingReference, inputBookings);
-    
   }
 
-  public int getCost() {
-    return 500;
+  public int getMusicCost() {
+    return 500; // set cost of music
   }
-
 }

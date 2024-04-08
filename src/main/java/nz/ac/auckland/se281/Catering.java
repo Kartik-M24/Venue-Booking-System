@@ -11,9 +11,4 @@ class Catering extends Services {
     super(bookingReference, bookings);
     this.cateringType = cateringType;
   }
-
-  public int getCost() {
-    int cateringTypeCost = cateringType.getCostPerPerson();
-    return cateringTypeCost;
-  }
 }

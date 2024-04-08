@@ -10,8 +10,13 @@ public class VenueHireSystem {
   private ArrayList<Booking> bookings = new ArrayList<Booking>(); // Arraylist of valid Bookings
   private Integer numberOfVenues;
   private Integer numberOfBookings;
-  private String date;
+  private String systemDate;
   private String availableDate;
+  private String floralName;
+  private String cateringName;
+  private int floralCost;
+  private int cateringCost;
+  private int musicCost;
 
   public VenueHireSystem() {}
 
@@ -39,7 +44,7 @@ public class VenueHireSystem {
 
     // Print list of already booked Venues (and their details)
     for (int i = 0; i < numberOfVenues; i++) {
-      availableDate = this.date;
+      availableDate = this.systemDate;
       if (numberOfBookings > 0) {
         for (int j = 0; j < numberOfBookings; j++) {
           if (hireVenue.get(i).getVenueCode().equals(bookings.get(j).getBookingsVenueCode())) {
@@ -72,22 +77,22 @@ public class VenueHireSystem {
   }
 
   public void setSystemDate(String dateInput) {
-    this.date = dateInput;
-    MessageCli.DATE_SET.printMessage(date);
+    this.systemDate = dateInput;
+    MessageCli.DATE_SET.printMessage(systemDate);
   }
 
   public void printSystemDate() {
-    if (this.date == null) {
+    if (this.systemDate == null) {
       MessageCli.CURRENT_DATE.printMessage("not set");
     } else {
-      MessageCli.CURRENT_DATE.printMessage(this.date);
+      MessageCli.CURRENT_DATE.printMessage(this.systemDate);
     }
   }
 
   public void makeBooking(String[] options) {
     Booking reservation = new Booking(); // Verifies Venue details and creates a new Venue object
     String[] bookingDetails = new String[2];
-    bookingDetails = reservation.checkValidBooking(options, this.date, hireVenue, bookings);
+    bookingDetails = reservation.checkValidBooking(options, this.systemDate, hireVenue, bookings);
 
     // If the venue is valid, add it to the list of venues
     if (bookingDetails[0].equals("1")) {
@@ -155,6 +160,9 @@ public class VenueHireSystem {
             bookingReference,
             cateringType,
             bookings); // Verifies Catering details and creates a new Catering object
+    cateringName = cateringType.getName();
+    cateringCost = cateringType.getCostPerPerson();
+
     if (addCatering.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Catering", bookingReference);
     } else {
@@ -165,6 +173,8 @@ public class VenueHireSystem {
 
   public void addServiceMusic(String bookingReference) {
     Music addMusic = new Music(bookingReference, bookings);
+    musicCost = addMusic.getMusicCost();
+
     if (addMusic.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Music", bookingReference);
     } else {
@@ -174,6 +184,9 @@ public class VenueHireSystem {
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
     Floral addFloral = new Floral(bookingReference, floralType, bookings);
+    floralName = floralType.getName();
+    floralCost = floralType.getCost();
+
     if (addFloral.checkBookingReference() == false) {
       MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
     } else {
@@ -183,7 +196,18 @@ public class VenueHireSystem {
   }
 
   public void viewInvoice(String bookingReference) {
-    Invoice invoice = new Invoice(bookingReference, bookings);
+    Invoice invoice =
+        new Invoice(
+            bookingReference,
+            bookings,
+            systemDate,
+            hireVenue,
+            cateringName,
+            cateringCost,
+            floralName,
+            floralCost,
+            musicCost);
+
     if (invoice.checkBookingReference() == false) {
       MessageCli.VIEW_INVOICE_BOOKING_NOT_FOUND.printMessage(bookingReference);
     } else {

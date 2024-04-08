@@ -12,10 +12,4 @@ class Floral extends Services {
     super(bookingReference, inputBookings);
     this.floralType = floralType;
   }
-
-  public int getCost() {
-    int floralTypeCost = floralType.getCost();
-    return floralTypeCost;
-  }
-
 }
