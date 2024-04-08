@@ -2,9 +2,14 @@ package nz.ac.auckland.se281;
 
 import java.util.ArrayList;
 
-class Floral extends Services {
+import nz.ac.auckland.se281.Types.FloralType;
 
-  public Floral(String bookingReference, ArrayList<Booking> inputBookings) {
+class Floral extends Services {
+  // Instance Fields
+  private FloralType floralType;
+
+  public Floral(String bookingReference, FloralType floralType, ArrayList<Booking> inputBookings) {
     super(bookingReference, inputBookings);
-    //TODO Auto-generated constructor stub
-  }}
+    this.floralType = floralType;
+  }
+}

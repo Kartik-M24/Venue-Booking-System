@@ -168,7 +168,10 @@ public class VenueHireSystem {
   }
 
   public void addServiceFloral(String bookingReference, FloralType floralType) {
-    // TODO implement this method
+    Floral addFloral = new Floral(bookingReference, floralType, bookings);
+    if (addFloral.checkBookingReference() == false) {
+      MessageCli.SERVICE_NOT_ADDED_BOOKING_NOT_FOUND.printMessage("Floral", bookingReference);
+    }
   }
 
   public void viewInvoice(String bookingReference) {
