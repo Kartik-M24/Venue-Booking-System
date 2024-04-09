@@ -8,6 +8,10 @@ class Music extends Services {
     super(bookingReference, inputBookings);
   }
 
+  public boolean checkBookingReference() {
+    return super.checkBookingReference();
+  }
+
   public int getMusicCost() {
     return 500; // set cost of music
   }

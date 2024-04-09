@@ -12,4 +12,8 @@ class FloralService extends Services {
     super(bookingReference, inputBookings);
     this.floralType = floralType;
   }
+  
+  public boolean checkBookingReference() {
+    return super.checkBookingReference();
+  }
 }

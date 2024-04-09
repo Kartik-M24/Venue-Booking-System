@@ -33,6 +33,10 @@ public class Invoice extends Services {
     this.musicCost = musicCost;
   }
 
+  public boolean checkBookingReference() {
+    return super.checkBookingReference();
+  }
+
   public void printInvoice() {
     int numberOfBookings = bookings.size();
     String customerEmail = null;

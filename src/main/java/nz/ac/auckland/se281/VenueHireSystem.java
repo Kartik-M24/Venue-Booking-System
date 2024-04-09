@@ -55,12 +55,20 @@ public class VenueHireSystem {
           }
         }
       }
-      MessageCli.VENUE_ENTRY.printMessage(
-          hireVenue.get(i).getVenueName(), // gets the corresponding venue i, and its name
-          hireVenue.get(i).getVenueCode(),
-          hireVenue.get(i).getCapacityInput(),
-          hireVenue.get(i).getHireFeeInput(),
-          availableDate);
+      if (availableDate == null) { // if systemDate isn't set
+        MessageCli.VENUE_ENTRY.printMessage(
+            hireVenue.get(i).getVenueName(),
+            hireVenue.get(i).getVenueCode(),
+            hireVenue.get(i).getCapacityInput(),
+            hireVenue.get(i).getHireFeeInput());
+      } else {
+        MessageCli.VENUE_ENTRY.printMessage(
+            hireVenue.get(i).getVenueName(), // gets the corresponding venue i, and its name
+            hireVenue.get(i).getVenueCode(),
+            hireVenue.get(i).getCapacityInput(),
+            hireVenue.get(i).getHireFeeInput(),
+            availableDate);
+      }
     }
   }
 
@@ -217,5 +225,11 @@ public class VenueHireSystem {
       invoice.printInvoice(); // This method gets values from the bookings and hireVenues arraylists
       // required for the invoice
     }
+    // Resetting the values of the invoice
+    cateringCost = 0;
+    floralCost = 0;
+    musicCost = 0;
+    cateringName = null;
+    floralName = null;
   }
 }
