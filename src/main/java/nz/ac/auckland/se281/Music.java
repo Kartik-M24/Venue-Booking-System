@@ -12,7 +12,13 @@ class Music extends Services {
     return super.checkBookingReference();
   }
 
-  public int getMusicCost() {
-    return 500; // set cost of music
+  @Override
+  public String getServiceName() {
+    return null;
+  }
+
+  @Override
+  public int getServiceCost() {
+    return 500; // Fixed cost for Music
   }
 }

@@ -15,4 +15,14 @@ class Catering extends Services {
   public boolean checkBookingReference() {
     return super.checkBookingReference();
   }
+
+  @Override
+  public String getServiceName() {
+    return cateringType.getName();
+  }
+
+  @Override
+  public int getServiceCost() {
+    return cateringType.getCostPerPerson();
+  }
 }

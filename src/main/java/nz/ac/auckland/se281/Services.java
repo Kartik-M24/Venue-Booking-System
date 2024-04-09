@@ -23,4 +23,8 @@ public abstract class Services {
     }
     return validReference;
   }
+
+  public abstract String getServiceName();
+
+  public abstract int getServiceCost();
 }

@@ -16,4 +16,17 @@ class FloralService extends Services {
   public boolean checkBookingReference() {
     return super.checkBookingReference();
   }
+
+  @Override
+  public String getServiceName() {
+    return floralType.getName();
+  }
+
+  @Override
+  public int getServiceCost() {
+    return floralType.getCost();
+  }
+  
+
+  
 }

@@ -83,4 +83,14 @@ public class Invoice extends Services {
     totalCost = Integer.parseInt(venueHireFee) + cateringCost + musicCost + floralCost;
     MessageCli.INVOICE_CONTENT_BOTTOM_HALF.printMessage(Integer.toString(totalCost));
   }
+
+  @Override
+  public String getServiceName() {
+    return null;
+  }
+
+  @Override
+  public int getServiceCost() {
+    return totalCost;
+  }
 }
